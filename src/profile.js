@@ -1,25 +1,18 @@
+import { useParams } from "react-router-dom"
 import { Col, Container, Row } from 'react-bootstrap'
-import Menu from './components/navbar'
 import CategoryList from './components/category-list'
 import LatestPosts from './components/latest-posts'
-import { initializeApp } from 'firebase/app'
-import { collection, getDocs, getFirestore, orderBy, query } from 'firebase/firestore/lite'
-import firebaseConfig from './firebase-config'
-import BlogPosts from './components/all-blog-posts'
+import Menu from './components/navbar'
 
-function Home() {
-    const config = firebaseConfig
-    const app = initializeApp(config)
-    const db = getFirestore(app)
-
-    return (
+function Profile() {
+    const { id, username } = useParams()
+    return(
         <>
             <Menu />
             <Container style={{marginTop:'25px'}}>
-                
                 <Row>
                     <Col xs={9}>
-                        <BlogPosts />
+                        <h2>{username}</h2>
                     </Col>
                     <Col xs={3}>
                         <CategoryList />
@@ -32,4 +25,4 @@ function Home() {
     )
 }
 
-export default Home
+export default Profile
